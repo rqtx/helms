@@ -1,0 +1,18 @@
+{{- if .Values.network.endpoint }}
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: {{ include "app.fullname" . }}
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+spec:
+  parentRefs:
+  - name: gateway
+    namespace: cilium
+  hostnames:
+  - {{ (split ":" .Values.network.endpoint)._0  }}
+  rules:
+    - backendRefs:
+      - name: {{ include "app.fullname" . }}
+        port: {{ (split ":" .Values.network.endpoint)._1 | default 80  }}
+{{- end }}
