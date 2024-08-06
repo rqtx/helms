@@ -37,7 +37,7 @@ spec:
             {{- if kindIs "string" . }}
             - {{ . }}
             {{- else }}
-            {{ toYaml . | nindent 4 }}
+            {{ toYaml . | nindent 12 }}
             {{- end }}
           {{- end }}
           securityContext:
