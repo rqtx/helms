@@ -1,0 +1,2 @@
+deploy:
+  helm package app
