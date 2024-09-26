@@ -48,14 +48,8 @@ spec:
             {{ toYaml . | nindent 12 }}
             {{- end }}
           {{- end }}
-          {{- with .Values.env }}
           env:
-            {{- if kindIs "string" . }}
-            - {{ . }}
-            {{- else }}
-            {{ toYaml . | nindent 12 }}
-            {{- end }}
-          {{- end }}
+            {{- toYaml .Values.env | nindent 12 }}
           securityContext:
             {{- include "app.deployment.securityContext" . | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
