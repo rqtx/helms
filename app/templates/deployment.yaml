@@ -32,7 +32,6 @@ spec:
         {{- include "app.deployment.podSecurityContext" . | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
-          {{- with .Values.args }}
           {{- with .Values.command }}
           command:
             {{- if kindIs "string" . }}
@@ -41,7 +40,16 @@ spec:
             {{ toYaml . | nindent 12 }}
             {{- end }}
           {{- end }}
+          {{- with .Values.args }}
           args:
+            {{- if kindIs "string" . }}
+            - {{ . }}
+            {{- else }}
+            {{ toYaml . | nindent 12 }}
+            {{- end }}
+          {{- end }}
+          {{- with .Values.env }}
+          env:
             {{- if kindIs "string" . }}
             - {{ . }}
             {{- else }}
