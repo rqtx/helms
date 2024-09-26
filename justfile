@@ -1,3 +1,3 @@
 deploy:
   helm package app
-  helm repo index app --url https://rqtx.github.io/helms/
+  helm repo index . --url https://rqtx.github.io/helms/
