@@ -31,7 +31,7 @@ spec:
       securityContext:
         {{- include "app.deployment.podSecurityContext" . | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ include "app.fullname" . }}
           {{- with .Values.command }}
           command:
             {{- if kindIs "string" . }}

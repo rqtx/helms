@@ -31,7 +31,7 @@ capabilities:
     - ALL
   add: {{ .Values.capabilities }}
 {{- else if eq .Values.podSecurityStandards "Baseline" -}}
-privileged: true
+privileged: false
 readOnlyRootFilesystem: true
 allowPrivilegeEscalation: true
 runAsNonRoot: true
