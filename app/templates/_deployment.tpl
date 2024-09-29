@@ -30,6 +30,15 @@ capabilities:
   drop:
     - ALL
   add: {{ .Values.capabilities }}
+{{- else if eq .Values.podSecurityStandards "Baseline" -}}
+privileged: true
+readOnlyRootFilesystem: true
+allowPrivilegeEscalation: true
+runAsNonRoot: true
+capabilities:
+  drop:
+    - ALL
+  add: {{ .Values.capabilities }}
 {{- else -}}
 privileged: false
 readOnlyRootFilesystem: true
