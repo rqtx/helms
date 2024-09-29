@@ -52,7 +52,7 @@ spec:
           env:
             {{- range $index, $value := .Values.env }}
             - name: {{ $value.name }}
-              value:  {{ $value.value }}
+              value:  "{{ $value.value }}"
             {{- end }}
           {{- end }}
           securityContext:
