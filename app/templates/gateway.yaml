@@ -1,4 +1,4 @@
-{{- if and (.Values.network.hostname) (.Values.network.http) }}
+{{- if (.Values.network.hostname) }}
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
 metadata:
@@ -13,13 +13,11 @@ spec:
   - {{ $.Values.network.hostname  }}
   rules:
     - backendRefs:
-      {{- range .Values.network.http }}
       - name: {{ include "app.fullname" $ }} # svc name
-        port: {{ . }}
-      {{- end }}
+        port: {{ 443 }}
 {{- end }}
 ---
-{{- if and (.Values.network.tcp) }}
+{{- if (.Values.network.tcp) }}
 apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TCPRoute
 metadata:
